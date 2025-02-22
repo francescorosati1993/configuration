@@ -1,0 +1,60 @@
+server:
+  port: 8222
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: dipendente-service
+          uri: http://dipendente-service:8070
+          predicates:
+            - Path=/app/dipendente/**
+
+        - id: dipendente-service
+          uri: http://dipendente-service:8070
+          predicates:
+            - Path=/app/dipartimento/**
+
+        - id: dipendente-service
+          uri: http://dipendente-service:8070
+          predicates:
+            - Path=/app/posizione/**
+
+        - id: dipendente-service
+          uri: http://dipendente-service:8070
+          predicates:
+            - Path=/app/auth/**
+
+        - id: comunicazioni-service
+          uri: http://comunicazioni-service:8071
+          predicates:
+            - Path=/app/comunicazione/**
+
+        - id: comunicazioni-service
+          uri: http://comunicazioni-service:8071
+          predicates:
+            - Path=/app/news/**
+
+        - id: badge-service
+          uri: http://badge-service:8072
+          predicates:
+            - Path=/app/badge/**
+
+        - id: curriculum-service
+          uri: http://curriculum-service:8073
+          predicates:
+            - Path=/app/curriculum/**
+
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

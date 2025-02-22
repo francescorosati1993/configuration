@@ -1,0 +1,14 @@
+eureka:
+  instance:
+    hostname: discovery-service
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka
+
+name:
+  value: trmon
+
+spring:
+  cloud:
+    config:
+      override-system-properties: false
