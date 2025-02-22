@@ -7,44 +7,44 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-      routes:
+       routes:
         - id: dipendente-service
-          uri: http://dipendente-service:8070
+          uri: lb://dipendente-service
           predicates:
             - Path=/app/dipendente/**
 
         - id: dipendente-service
-          uri: http://dipendente-service:8070
+          uri: lb://dipendente-service
           predicates:
             - Path=/app/dipartimento/**
 
         - id: dipendente-service
-          uri: http://dipendente-service:8070
+          uri: lb://dipendente-service
           predicates:
             - Path=/app/posizione/**
 
         - id: dipendente-service
-          uri: http://dipendente-service:8070
+          uri: lb://dipendente-service
           predicates:
             - Path=/app/auth/**
 
         - id: comunicazioni-service
-          uri: http://comunicazioni-service:8071
+          uri: lb://comunicazioni-service
           predicates:
             - Path=/app/comunicazione/**
 
         - id: comunicazioni-service
-          uri: http://comunicazioni-service:8071
+          uri: lb://comunicazioni-service
           predicates:
             - Path=/app/news/**
 
         - id: badge-service
-          uri: http://badge-service:8072
+          uri: lb://badge-service
           predicates:
             - Path=/app/badge/**
 
         - id: curriculum-service
-          uri: http://curriculum-service:8073
+          uri: lb://curriculum-service
           predicates:
             - Path=/app/curriculum/**
 
