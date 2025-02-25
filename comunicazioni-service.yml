@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://host.docker.internal:5433/comunicazioni
+    username: admin
+    password: password
+    jpa:
+      hibernate:
+        ddl-auto: update
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      show-sql: true
+    cloud:
+      openfeign:
+        client:
+          config:
+            dipendente-service:
+              url: http://dipendente-service:8070/app/dipendente
+    kafka:
+      producer:
+        bootstrap-servers: host.docker.internal:9092
+        group-id: comunicazioni-group
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+        properties:
+          spring.json.type.mapping: >
+            communicationConfirmation:com.azienda.gestionale.comunicazioni.kafka.CommunicationConfirmation,
+            newsConfirmation:com.azienda.gestionale.comunicazioni.kafka.NewsConfirmation
+
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://discovery-service:8761/eureka/
+
+
+  server:
+    port: 8071
+
+  application:
+    config:
+      dipendente-url: http://dipendente-service:8070/app/dipendente
+      posizione-url: http://dipendente-service:8070/app/posizione
+      dipartimento-url: http://dipendente-service:8070/app/dipartimento
